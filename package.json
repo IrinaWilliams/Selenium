@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/IrinaWilliams/Selenium/issues"
   },
-  "homepage": "https://github.com/IrinaWilliams/Selenium#readme"
+  "homepage": "https://github.com/IrinaWilliams/Selenium#readme",
+  "dependencies": {
+    "@wdio/cli": "^5.16.10",
+    "webdriverio": "^5.16.10"
+  }
 }
