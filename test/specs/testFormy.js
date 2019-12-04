@@ -1,39 +1,29 @@
 //import {expect} from 'chai';
-import {assert} from 'chai';
-//import data from './data/data';
-import KeypressPage from './classes/keypress.page';
-import HomePage from './classes/home.page';
-import AutoPage from './classes/autocomplete.page';
-import ScrollPage from './classes/scrollToElement.page';
-import SwitchWindow from './classes/swichWindow.page';
+import {
+    assert
+} from 'chai';
+import data from '../data/data';
+import KeypressPage from '../classes/keypress.page';
+import HomePage from '../classes/home.page';
+import AutoPage from '../classes/autocomplete.page';
+import ScrollPage from '../classes/scrollToElement.page';
+import SwitchWindow from '../classes/swichWindow.page';
+import ModalPage from '../classes/modal.page'
 
-const data = {
-    h1: 'Welcome to Formy',
-    keyAndMouse: 'Key and Mouse Press',
-    name: 'Irina Williams',
-    keypressH1: 'Keyboard and Mouse Input',
-    autocompletePageTitle: 'Autocomplete',
-    setFullAdress: '5508 Old Greenhouse Road, Houston',
-    autoFullAdress: '5508 Old Greenhouse Road, Houston, TX, USA',
-    scrollH1: 'Large page content',
-    date: '01/01/2020',
-    switchH1: 'Switch Window'
-
-}
 
 describe('Home Page', () => {
     before(() => {
         HomePage.open();
     });
 
-    it.only('should verify that the `Home Page` has a h1 title', () => {
+    it('should verify that the `Home Page` has a h1 title', () => {
         assert.equal(HomePage.h1.getText(), data.h1, true);
     });
 
     it('should verify that the list has `Key and Mouse Press` title', () => {
         assert.equal(HomePage.keyAndMouse.getText(), data.keyAndMouse, true);
     });
-    
+
 });
 
 describe('Testing `Keypress` Page', () => {
@@ -74,7 +64,7 @@ describe('Testing `Autocomplete` Page', () => {
     it('should verify that full adress can be entered', () => {
         AutoPage.setFullAdress(data.setFullAdress);
     });
-    
+
     it('should verify that autocomplete of input address fiels works', () => {
         AutoPage.autocompleteResult.waitForDisplayed(2000);
         AutoPage.autocompleteResult.click();
@@ -86,18 +76,21 @@ describe('Testing `Autocomplete` Page', () => {
 describe('Testing `Large page content` Page', () => {
     before(() => {
         ScrollPage.open();
-   });
+    });
 
-   it('should varify that Page name is correct', () => {
-       assert.equal(ScrollPage.h1.getText(), data.scrollH1, "[message]");
-   });
+    it('should varify that Page name is correct', () => {
+        assert.equal(ScrollPage.h1.getText(), data.scrollH1, "[message]");
+    });
 
-   it('should scroll to the buttom of the page', () => {
-        ScrollPage.inputFullName.scrollIntoView({behavior: "smooth", block: "end"});
+    it('should scroll to the buttom of the page', () => {
+        ScrollPage.inputFullName.scrollIntoView({
+            behavior: "smooth",
+            block: "end"
+        });
         assert.isTrue(ScrollPage.inputFullName.isDisplayed(), "[message]");
         ScrollPage.setName(data.name);
         ScrollPage.setDate(data.date);
-   });
+    });
 });
 
 describe('Testing `Switch Window` Page', () => {
@@ -111,14 +104,12 @@ describe('Testing `Switch Window` Page', () => {
 
     it('should redirect to Home page by clicking `Open new tab` button', () => {
         const originalWndowHandle = browser.getWindowHandle();
-                    console.log(originalWndowHandle);
         SwitchWindow.openTab.click();
-                    browser.pause(2000)
+        browser.pause(2000)
         const hendles = browser.getWindowHandles();
-                    console.log(hendles);
-        for(let i = 0; i < hendles.length; i++){
-            if(hendles[i] !== originalWndowHandle){
-                browser.switchToWindow(hendles[i])
+        for (let i = 0; i < hendles.length; i++) {
+            if (hendles[i] !== originalWndowHandle) {
+                browser.switchToWindow(hendles[i]);
                 browser.pause(2000);
                 assert.equal(HomePage.h1.getText(), data.h1, "[message]");
                 browser.closeWindow();
@@ -126,11 +117,50 @@ describe('Testing `Switch Window` Page', () => {
         }
         browser.pause(2000);
         assert.equal(SwitchWindow.pageName.getText(), data.switchH1, "[message]");
+    });
 
-
-
+    it('should open and close a alert pop-up', () => {
+        SwitchWindow.openAlert.click();
+        browser.pause(2000);
+        browser.acceptAlert();
+        browser.pause(2000);
     });
 });
 
+describe('Testing `Modal` Page', () => {
+    before(() => {
+        ModalPage.open();
+    });
 
+    it('should verify that page name is correct', () => {
+        assert.equal(ModalPage.pageName.getText(), data.modalH1)
+    });
+    it.only('should verify that click on `Open modal` button open modal window', () => {
+        ModalPage.openModalButton.click();
+        browser.pause(500);
+        assert.equal(ModalPage.modalTitle.getText(), data.modalTitle, "[message]");
+        
+    });
+    it('should verify that close button able to close modal window ', () => {
+        assert.isTrue(ModalPage.setCloseClick, "[message]");
+    });
+});
 
+// describe('example: ',function(){
+//     it("google example",function(){
+//     // login.login();
+    
+//         let link = 'a.gb_e'
+//         browser.url('http://google.com');
+    
+//         browser.waitForVisible(link);
+//         console.log(`found ${link}`);
+//         browser.click(link);
+    
+//         let button = '.h-c-button';
+//         browser.waitForVisible(button);
+//         console.log(`found ${button}`);
+//         browser.click(button);
+//         browser.pause(5000);
+//         })
+//     })

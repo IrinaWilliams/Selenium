@@ -8,6 +8,9 @@ export default {
     autoFullAdress: '5508 Old Greenhouse Road, Houston, TX, USA',
     scrollH1: 'Large page content',
     date: '01/01/2020',
-    switchH1: 'Switch Window'
+    switchH1: 'Switch Window',
+    modalH1: 'Modal',
+    modalTitle: 'Modal title',
+    
 
 }

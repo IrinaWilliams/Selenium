@@ -17,7 +17,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './test/specs/**/*.js'
+        './test/specs/testFormy.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -56,7 +56,12 @@ exports.config = {
         // it is possible to configure which logTypes to include/exclude.
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
         // excludeDriverLogs: ['bugreport', 'server'],
-    }],
+    }
+    // {
+    //     maxInstances: 1,
+    //     browserName: 'safari', 
+    // }
+    ],
     //
     // ===================
     // Test Configurations
@@ -88,7 +93,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://localhost',
+    baseUrl: 'https://formy-project.herokuapp.com',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -200,6 +205,9 @@ exports.config = {
             browser.takeScreenshot();
         }
     },
+    //afterTest: (test, context, { error, result, duration, passed, retries }) => {
+    //     console.log(`Finished test "${test.parent} - ${test.title}"`)
+    // },
 
 
     /**
