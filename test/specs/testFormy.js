@@ -8,8 +8,10 @@ import HomePage from '../classes/home.page';
 import AutoPage from '../classes/autocomplete.page';
 import ScrollPage from '../classes/scrollToElement.page';
 import SwitchWindow from '../classes/swichWindow.page';
-import ModalPage from '../classes/modal.page'
-
+import ModalPage from '../classes/modal.page';
+import DragIntoBox from '../classes/dragImageBox.page';
+import RadioButton from '../classes/radioButton.page';
+import DatePicker from '../classes/datepicker.page';
 
 describe('Home Page', () => {
     before(() => {
@@ -135,32 +137,77 @@ describe('Testing `Modal` Page', () => {
     it('should verify that page name is correct', () => {
         assert.equal(ModalPage.pageName.getText(), data.modalH1)
     });
-    it.only('should verify that click on `Open modal` button open modal window', () => {
-        ModalPage.openModalButton.click();
+    it('should verify that click on `Open modal` button open modal window', () => {
+        ModalPage.setOpenModal();
         browser.pause(500);
         assert.equal(ModalPage.modalTitle.getText(), data.modalTitle, "[message]");
         
     });
-    it('should verify that close button able to close modal window ', () => {
-        assert.isTrue(ModalPage.setCloseClick, "[message]");
+    it('should verify that buttons on modal window work as expected ', () => {
+        ModalPage.setCloseClick();
+        browser.pause(500);
+        ModalPage.setOpenModal();
+        browser.pause(500);
+        ModalPage.setCrossClick();
+        browser.pause(500);
+        ModalPage.setOpenModal();
+        browser.pause(500);
+        ModalPage.setOkClick();
     });
 });
 
-// describe('example: ',function(){
-//     it("google example",function(){
-//     // login.login();
+describe('Testing `Drag the image into the box` page', () => {
+    before(() => {
+        DragIntoBox.open();
+    });
+    it('should verify that page name is correct', () => {
+       const pageTitle = DragIntoBox.dragTitle.getText();
+       assert.equal(pageTitle, data.dragTitle, "[message]");
+    });
+
+    it('should arraging components on the screen', () => {
+        
+    });
+    it('shoud moving or manipulating image', () => {
+        browser.pause(2000);
+        DragIntoBox.dragImage.dragAndDrop(DragIntoBox.imageBox, 2000);
+        browser.pause(5000);
+        browser.takeScreenshot();
+
+    });
+
+});
+
+describe('Testing `Radio button` page', () => {
+    before(() => {
+        RadioButton.open();
+    });
+
+    it('should verify that page name is correct', () => {
+        assert.equal(RadioButton.radioTitle.getText(), data.radioH1, "[message]");
+    });
+
+    it('should verify that radio buttona are worked', () => {
+            RadioButton.clickRadio1();
+            RadioButton.clickRadio2();
+            RadioButton.clickRadio3();
+    });
     
-//         let link = 'a.gb_e'
-//         browser.url('http://google.com');
+    // it.only('should console.log title name', async () => {
+        //     const title = await RadioButton.radioTitle.getText();
+        //     console.log(title);
+        //   });
+        
+    });
     
-//         browser.waitForVisible(link);
-//         console.log(`found ${link}`);
-//         browser.click(link);
-    
-//         let button = '.h-c-button';
-//         browser.waitForVisible(button);
-//         console.log(`found ${button}`);
-//         browser.click(button);
-//         browser.pause(5000);
-//         })
-//     })
+describe('Testing `Datepicker` page', () => {
+    before(() => {
+        DatePicker.open();
+    });
+
+    it('should verify thar page has correct h1', () => {
+        assert.equal(DatePicker.datePickerTitle.getText(), data.datePickerH1, "[message]");
+    });
+    it
+
+});

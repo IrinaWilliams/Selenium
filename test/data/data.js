@@ -11,6 +11,9 @@ export default {
     switchH1: 'Switch Window',
     modalH1: 'Modal',
     modalTitle: 'Modal title',
-    
+    dragTitle: 'Drag the image into the box',
+    radioH1: 'Radio buttons',
+    datePickerH1: 'Datepicker'
+
 
 }
