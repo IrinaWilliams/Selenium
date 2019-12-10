@@ -13,7 +13,8 @@ export default {
     modalTitle: 'Modal title',
     dragTitle: 'Drag the image into the box',
     radioH1: 'Radio buttons',
-    datePickerH1: 'Datepicker'
+    datePickerH1: 'Datepicker',
+    dateCurrentMonth: 'December 2019'
 
 
 }

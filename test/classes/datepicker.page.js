@@ -7,10 +7,11 @@ class DatePicker extends Page{
     }
 
     get datePickerTitle(){return $('h1')};
-    get dateField(){return $('#placeholder')};
+    get dateField(){return $('input#datepicker.form-control')};
     get datePicker(){return $('div.datepicker-days')};
+    get currMonthTitle(){return $('.datepicker-title')}
     get monthNext(){return $('th.next')};
-    get currentMonth(){return $('th.datepicker-switch')};
+    get getCurrentMonth(){return $('th.datepicker-switch')};
 
 }
 export default new DatePicker();

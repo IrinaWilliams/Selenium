@@ -205,9 +205,17 @@ describe('Testing `Datepicker` page', () => {
         DatePicker.open();
     });
 
-    it('should verify thar page has correct h1', () => {
+    it('should verify that page has correct h1', () => {
         assert.equal(DatePicker.datePickerTitle.getText(), data.datePickerH1, "[message]");
     });
-    it
+    it.only('should verify that after click the datepicker is visible', () => {
+        DatePicker.dateField.click();
+        browser.pause(1000);
+        assert.isTrue(DatePicker.datePicker.isDisplayed(), "[message]");
+        assert.equal(DatePicker.getCurrentMonth.getText(), data.dateCurrentMonth, "[message]");
+    });
+    it('should verify that user can to choose diffrent month', () => {
+        
+    });
 
 });
